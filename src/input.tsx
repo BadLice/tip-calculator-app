@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { NumberFormatValues, NumericFormatProps, OnValueChange } from 'react-number-format';
+import {
+	NumberFormatValues,
+	NumericFormatProps,
+	OnValueChange,
+	SourceInfo,
+} from 'react-number-format';
 import styled from 'styled-components';
 import Input from './styledComponents/input';
 import Label from './styledComponents/label';
@@ -57,16 +62,21 @@ const NumberInput = ({
 	decimalScale,
 	label,
 	isValid,
+	onValueChange,
+	value,
 }: NumberInputProps) => {
 	const [error, setError] = useState<boolean | string>(false);
 
-	const handleValidation = (e: NumberFormatValues) => {
+	const handleChange = (e: NumberFormatValues, s: SourceInfo) => {
 		if (isValid) {
 			let valid = isValid(e.floatValue!);
 			setError(typeof valid === 'boolean' ? !valid : valid);
-			return;
+		} else {
+			setError(false);
 		}
-		setError(false);
+		if (onValueChange) {
+			onValueChange(e, s);
+		}
 	};
 
 	return (
@@ -82,7 +92,8 @@ const NumberInput = ({
 						allowNegative={allowNegative}
 						decimalScale={decimalScale}
 						placeholder='0'
-						onValueChange={handleValidation}
+						onValueChange={handleChange}
+						value={value}
 					/>
 				</Label>
 			</Container>

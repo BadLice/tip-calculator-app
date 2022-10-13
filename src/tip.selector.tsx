@@ -1,13 +1,9 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from './button';
+import { TipContext } from './contexts/tip.context';
 import Input from './styledComponents/input';
 import Label from './styledComponents/label';
-
-type TipSelectorProps = {
-	tip: number;
-	setTip: React.Dispatch<React.SetStateAction<number | null>>;
-};
 
 type RadioProps = {
 	$selected: boolean;
@@ -34,14 +30,32 @@ const RadioButton = styled(Button)<RadioProps & React.HTMLProps<HTMLButtonElemen
 const TipInput = styled(Input)<RadioProps>`
 	width: 98px;
 	margin-top: 0px;
+	&::placeholder {
+		text-align: center;
+	}
 `;
 
-const TipSelector = ({ tip, setTip }: TipSelectorProps) => {
-	const [selection, setSelection] = useState<string | null>(null);
+const TipSelector = () => {
+	const ctx = useContext(TipContext);
 
-	const handleChangeSelection = (selected: string, tip: number) => {
-		setSelection(selected);
-		setTip(null);
+	const [tipPerc, setTipPerc] = useState<number | string | null>(null);
+
+	const ctxSelected = ctx!.parameters.selected;
+
+	//delete internal state when context state is deleted
+	useEffect(() => {
+		if (!ctxSelected) {
+			setTipPerc('');
+		}
+	}, [ctxSelected]);
+
+	const handleChangeSelection = (selected: string, tipPerc: number) => {
+		if (selected === 'custom') {
+			setTipPerc(tipPerc);
+		} else {
+			setTipPerc('');
+		}
+		ctx!.setParameters({ selected, tipPerc });
 	};
 
 	return (
@@ -51,44 +65,45 @@ const TipSelector = ({ tip, setTip }: TipSelectorProps) => {
 				<RadioButton
 					id='five'
 					onClick={() => handleChangeSelection('five', 5)}
-					$selected={selection === 'five'}
+					$selected={ctx!.parameters.selected === 'five'}
 				>
 					5%
 				</RadioButton>
 				<RadioButton
 					id='ten'
 					onClick={() => handleChangeSelection('ten', 10)}
-					$selected={selection === 'ten'}
+					$selected={ctx!.parameters.selected === 'ten'}
 				>
 					10%
 				</RadioButton>
 				<RadioButton
 					id='fifteen'
 					onClick={() => handleChangeSelection('fifteen', 15)}
-					$selected={selection === 'fifteen'}
+					$selected={ctx!.parameters.selected === 'fifteen'}
 				>
 					15%
 				</RadioButton>
 				<RadioButton
 					id='twentifive'
 					onClick={() => handleChangeSelection('twentifive', 25)}
-					$selected={selection === 'twentifive'}
+					$selected={ctx!.parameters.selected === 'twentifive'}
 				>
 					25%
 				</RadioButton>
 				<RadioButton
 					id='fifty'
 					onClick={() => handleChangeSelection('fifty', 50)}
-					$selected={selection === 'fifty'}
+					$selected={ctx!.parameters.selected === 'fifty'}
 				>
 					50%
 				</RadioButton>
 				<TipInput
 					id={'custom'}
-					$selected={selection === 'custom'}
+					$selected={ctx!.parameters.selected === 'custom'}
 					onValueChange={(e) => handleChangeSelection('custom', e.floatValue!)}
-					value={tip}
+					value={tipPerc}
 					allowNegative={false}
+					placeholder='Custom'
 				/>
 			</Container>
 		</>
