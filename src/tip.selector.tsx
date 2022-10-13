@@ -11,7 +11,7 @@ type RadioProps = {
 
 const Container = styled.div`
 	width: 100%;
-	height: 100%;
+	height: 50%;
 	display: flex;
 	flex-direction: row;
 	gap: 10px;
@@ -19,19 +19,33 @@ const Container = styled.div`
 	justify-content: center;
 	align-items: flex-start;
 	align-content: flex-start;
+
+	@media (max-width: 700px) {
+		gap: 6%;
+		max-height: 200px;
+	}
 `;
 
 const RadioButton = styled(Button)<RadioProps & React.HTMLProps<HTMLButtonElement>>`
 	transition: background-color 0.2s ease-in;
 	background-color: ${({ $selected }) => ($selected ? '#a7e7df' : '#1b494d')};
 	color: ${({ $selected }) => ($selected ? '#1b494d' : '#fff')};
+
+	@media (max-width: 700px) {
+		width: 45%;
+	}
 `;
 
 const TipInput = styled(Input)<RadioProps>`
 	width: 98px;
 	margin-top: 0px;
+
 	&::placeholder {
 		text-align: center;
+	}
+
+	@media (max-width: 700px) {
+		width: 45%;
 	}
 `;
 

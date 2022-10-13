@@ -13,6 +13,13 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 9%;
+
+	@media (max-width: 700px) {
+		min-height: 350px;
+		width: 100%;
+		flex: 1 0;
+		gap: 7%;
+	}
 `;
 
 const Interactive = () => {
