@@ -37,6 +37,13 @@ const Wrapper = styled.div`
 const ResetButton = styled(Button)`
 	width: 100%;
 	margin-top: 25%;
+	background-color: #a7e7df;
+	color: #1b494d;
+
+	&:active {
+		background-color: #1b494d;
+		color: #a7e7df;
+	}
 
 	@media (max-width: 700px) {
 		margin-top: 0%;
@@ -59,7 +66,7 @@ const Result = () => {
 					secondaryText='/ person'
 					value={ctx!.results.total}
 				/>
-				<ResetButton onClick={() => ctx!.reset()}>Reset</ResetButton>
+				<ResetButton onClick={() => ctx!.reset()}>RESET</ResetButton>
 			</Wrapper>
 		</Container>
 	);

@@ -31,6 +31,7 @@ const Btn = styled.button<ButtonProps>`
 	box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
 	cursor: pointer;
 	transition: background-color 0.2s linear;
+	font-weight: bold;
 
 	&:active {
 		background-color: #a7e7df;
