@@ -13,7 +13,7 @@ const Container = styled.div`
 	width: 50%;
 	height: 100%;
 	border-radius: 20px;
-	background-color: #1b494d;
+	background-color: ${({ theme }) => theme.colors.background.button.default};
 
 	@media (max-width: 700px) {
 		width: 100%;
@@ -37,12 +37,12 @@ const Wrapper = styled.div`
 const ResetButton = styled(Button)`
 	width: 100%;
 	margin-top: 25%;
-	background-color: #a7e7df;
-	color: #1b494d;
+	background-color: ${({ theme }) => theme.colors.background.button.active};
+	color: ${({ theme }) => theme.colors.text.button.active};
 
 	&:active {
-		background-color: #1b494d;
-		color: #a7e7df;
+		background-color: ${({ theme }) => theme.colors.background.button.default};
+		color: ${({ theme }) => theme.colors.text.button.default};
 	}
 
 	@media (max-width: 700px) {

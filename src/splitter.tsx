@@ -11,7 +11,7 @@ const Container = styled.div`
 	align-items: center;
 	letter-spacing: 5px;
 	font-weight: bold;
-	color: #102e2d;
+	color: ${({ theme }) => theme.colors.text.input.default};
 	font-size: 20px;
 `;
 

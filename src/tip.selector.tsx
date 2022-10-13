@@ -28,8 +28,12 @@ const Container = styled.div`
 
 const RadioButton = styled(Button)<RadioProps & React.HTMLProps<HTMLButtonElement>>`
 	transition: background-color 0.2s ease-in;
-	background-color: ${({ $selected }) => ($selected ? '#a7e7df' : '#1b494d')};
-	color: ${({ $selected }) => ($selected ? '#1b494d' : '#fff')};
+	background-color: ${({ $selected, theme }) =>
+		$selected
+			? theme.colors.background.button.active
+			: theme.colors.background.button.default};
+	color: ${({ $selected, theme }) =>
+		$selected ? theme.colors.text.button.active : theme.colors.text.button.default};
 
 	@media (max-width: 700px) {
 		width: 45%;

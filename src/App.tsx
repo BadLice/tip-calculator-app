@@ -6,13 +6,14 @@ import { TipProvider } from './contexts/tip.context';
 import Interactive from './interactive';
 import Result from './result';
 import Splitter from './splitter';
+import Theme from './theme';
 
 const GlobalStyle = createGlobalStyle`
   body,html {
     height: 100%;
 	width: 100%;
 	margin: 0;
-    background-color: #c7e3e6;
+	background-color: ${({ theme }) => theme.colors.background.default};
   }
   * {
     box-sizing:border-box;
@@ -38,7 +39,7 @@ const CenterContainer = styled.div`
 	}
 `;
 
-const Wrapper = styled.div`
+const Card = styled.div`
 	max-width: 700px;
 	min-width: 700px;
 	max-height: 350px;
@@ -47,7 +48,7 @@ const Wrapper = styled.div`
 	height: 42%;
 	padding: 20px;
 	border-radius: 20px;
-	background-color: white;
+	background-color: ${({ theme }) => theme.colors.background.card};
 	display: flex;
 	flex-direction: row;
 	gap: 30px;
@@ -73,18 +74,18 @@ const App = () => {
 	}, []);
 
 	return (
-		<>
+		<Theme>
 			<GlobalStyle />
 			<CenterContainer>
 				<Splitter />
-				<Wrapper>
+				<Card>
 					<TipProvider>
 						<Interactive />
 						<Result />
 					</TipProvider>
-				</Wrapper>
+				</Card>
 			</CenterContainer>
-		</>
+		</Theme>
 	);
 };
 

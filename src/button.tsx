@@ -20,8 +20,8 @@ type RippleState = RippleProps & {
 const Btn = styled.button<ButtonProps>`
 	width: 98px;
 	height: 40px;
-	background-color: #1b494d;
-	color: #fff;
+	background-color: ${({ theme }) => theme.colors.background.button.default};
+	color: ${({ theme }) => theme.colors.text.button.default};
 	border: none;
 	border-radius: 5px;
 	font-size: 20px;
@@ -34,8 +34,8 @@ const Btn = styled.button<ButtonProps>`
 	font-weight: bold;
 
 	&:active {
-		background-color: #a7e7df;
-		color: #1b494d;
+		background-color: ${({ theme }) => theme.colors.background.button.active};
+		color: ${({ theme }) => theme.colors.text.button.active};
 	}
 `;
 

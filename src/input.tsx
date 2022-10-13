@@ -43,7 +43,7 @@ const Icon = styled.div<IconProps>`
 const ErrorLabel = styled(Label)`
 	width: 50%;
 	text-align: right;
-	color: #d48f81;
+	color: ${({ theme }) => theme.colors.text.error}; ;
 `;
 
 const TextLabel = styled(Label)`
