@@ -1,6 +1,17 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Input } from './input';
+import Button from './button';
+import Input from './styledComponents/input';
+import Label from './styledComponents/label';
+
+type TipSelectorProps = {
+	tip: number;
+	setTip: React.Dispatch<React.SetStateAction<number | null>>;
+};
+
+type RadioProps = {
+	$selected: boolean;
+};
 
 const Container = styled.div`
 	width: 100%;
@@ -14,17 +25,10 @@ const Container = styled.div`
 	align-content: flex-start;
 `;
 
-type RadioProps = {
-	$selected: boolean;
-};
-const Button = styled.button<RadioProps>`
-	width: 98px;
-	height: 40px;
+const RadioButton = styled(Button)<RadioProps & React.HTMLProps<HTMLButtonElement>>`
+	transition: background-color 0.2s ease-in;
 	background-color: ${({ $selected }) => ($selected ? '#a7e7df' : '#1b494d')};
 	color: ${({ $selected }) => ($selected ? '#1b494d' : '#fff')};
-	border: none;
-	border-radius: 5px;
-	font-size: 25px;
 `;
 
 const TipInput = styled(Input)<RadioProps>`
@@ -32,66 +36,62 @@ const TipInput = styled(Input)<RadioProps>`
 	margin-top: 0px;
 `;
 
-type TipSelectorProps = {
-	tip: number;
-	setTip: React.Dispatch<React.SetStateAction<number | null>>;
-};
-
 const TipSelector = ({ tip, setTip }: TipSelectorProps) => {
 	const [selection, setSelection] = useState<string | null>(null);
 
-	const handleChangeSelection = (selected: string) => {
+	const handleChangeSelection = (selected: string, tip: number) => {
 		setSelection(selected);
 		setTip(null);
 	};
 
-	console.log(tip);
-
 	return (
-		<Container>
-			<Button
-				id='five'
-				onClick={() => handleChangeSelection('five')}
-				$selected={selection === 'five'}
-			>
-				5%
-			</Button>
-			<Button
-				id='ten'
-				onClick={() => handleChangeSelection('ten')}
-				$selected={selection === 'ten'}
-			>
-				10%
-			</Button>
-			<Button
-				id='fifteen'
-				onClick={() => handleChangeSelection('fifteen')}
-				$selected={selection === 'fifteen'}
-			>
-				15%
-			</Button>
-			<Button
-				id='twentifive'
-				onClick={() => handleChangeSelection('twentifive')}
-				$selected={selection === 'twentifive'}
-			>
-				25%
-			</Button>
-			<Button
-				id='fifty'
-				onClick={() => handleChangeSelection('fifty')}
-				$selected={selection === 'fifty'}
-			>
-				50%
-			</Button>
-			<TipInput
-				id={'custom'}
-				onClick={() => handleChangeSelection('custom')}
-				$selected={selection === 'custom'}
-				onValueChange={(e) => setTip(e.floatValue!)}
-				value={tip}
-			/>
-		</Container>
+		<>
+			<Container>
+				<Label>Select Tip %</Label>
+				<RadioButton
+					id='five'
+					onClick={() => handleChangeSelection('five', 5)}
+					$selected={selection === 'five'}
+				>
+					5%
+				</RadioButton>
+				<RadioButton
+					id='ten'
+					onClick={() => handleChangeSelection('ten', 10)}
+					$selected={selection === 'ten'}
+				>
+					10%
+				</RadioButton>
+				<RadioButton
+					id='fifteen'
+					onClick={() => handleChangeSelection('fifteen', 15)}
+					$selected={selection === 'fifteen'}
+				>
+					15%
+				</RadioButton>
+				<RadioButton
+					id='twentifive'
+					onClick={() => handleChangeSelection('twentifive', 25)}
+					$selected={selection === 'twentifive'}
+				>
+					25%
+				</RadioButton>
+				<RadioButton
+					id='fifty'
+					onClick={() => handleChangeSelection('fifty', 50)}
+					$selected={selection === 'fifty'}
+				>
+					50%
+				</RadioButton>
+				<TipInput
+					id={'custom'}
+					$selected={selection === 'custom'}
+					onValueChange={(e) => handleChangeSelection('custom', e.floatValue!)}
+					value={tip}
+					allowNegative={false}
+				/>
+			</Container>
+		</>
 	);
 };
 

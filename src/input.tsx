@@ -1,46 +1,26 @@
-import { NumericFormat, NumericFormatProps } from 'react-number-format';
+import { useState } from 'react';
+import { NumberFormatValues, NumericFormatProps, OnValueChange } from 'react-number-format';
 import styled from 'styled-components';
-
-type InputProps = NumericFormatProps & {
-	$hasIcon?: boolean;
-};
-export const Input = styled(NumericFormat)<InputProps>`
-	width: 100%;
-	height: 40px;
-	outline: none;
-	border: none;
-	background-color: #f3f8fb;
-	text-align: right;
-	font-size: 18px;
-	color: #183b3d;
-	padding-left: ${({ $hasIcon }) => ($hasIcon ? '25px' : '10px')};
-	border-radius: 5px;
-	padding-right: 10px;
-	font-weight: bold;
-	margin-top: 5px;
-	&:focus {
-		outline: 2px solid #5c9f95;
-	}
-	&:active {
-		outline: 2px solid #5c9f95;
-	}
-`;
-
-const Label = styled.label`
-	position: relative;
-	color: #6f7879;
-	font-weight: bold;
-	font-size: 13px;
-`;
+import Input from './styledComponents/input';
+import Label from './styledComponents/label';
 
 type IconProps = {
 	path: string;
 };
 
+type NumberInputProps = NumericFormatProps & {
+	iconPath?: string;
+	allowNegative?: boolean;
+	decimalScale?: number;
+	label?: string;
+	isValid?: (value: number) => boolean | string;
+	onValueChange?: OnValueChange | undefined;
+};
+
 const Icon = styled.div<IconProps>`
 	& {
 		position: absolute;
-		top: calc(50% + 7px);
+		top: calc(36%);
 		left: 10px;
 		color: silver;
 		display: inline-block;
@@ -55,25 +35,57 @@ const Icon = styled.div<IconProps>`
 	}
 `;
 
-type NumberInputProps = NumericFormatProps & {
-	path?: string;
-	allowNegative?: boolean;
-	decimalScale?: number;
-	label?: string;
-};
+const ErrorLabel = styled(Label)`
+	width: 50%;
+	text-align: right;
+	color: #d48f81;
+`;
 
-const NumberInput = ({ path, allowNegative, decimalScale, label }: NumberInputProps) => {
+const TextLabel = styled(Label)`
+	width: 50%;
+`;
+
+const Container = styled.div`
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+`;
+
+const NumberInput = ({
+	iconPath,
+	allowNegative,
+	decimalScale,
+	label,
+	isValid,
+}: NumberInputProps) => {
+	const [error, setError] = useState<boolean | string>(false);
+
+	const handleValidation = (e: NumberFormatValues) => {
+		if (isValid) {
+			let valid = isValid(e.floatValue!);
+			setError(typeof valid === 'boolean' ? !valid : valid);
+			return;
+		}
+		setError(false);
+	};
+
 	return (
 		<>
-			<Label>
-				{label}
-				{path && <Icon path={path} />}
-				<Input
-					$hasIcon={!!path}
-					allowNegative={allowNegative}
-					decimalScale={decimalScale}
-				/>
-			</Label>
+			<Container>
+				<TextLabel>{label}</TextLabel>
+				{error && typeof error === 'string' && <ErrorLabel>{error}</ErrorLabel>}
+				<Label>
+					{iconPath && <Icon path={iconPath} />}
+					<Input
+						$hasIcon={!!iconPath}
+						$error={!!error}
+						allowNegative={allowNegative}
+						decimalScale={decimalScale}
+						placeholder='0'
+						onValueChange={handleValidation}
+					/>
+				</Label>
+			</Container>
 		</>
 	);
 };

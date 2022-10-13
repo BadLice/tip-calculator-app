@@ -67,21 +67,30 @@ function App() {
 
 	const [tip, setTip] = useState<number | null>(null);
 
+	const isValidNumber = (value: number) =>
+		value === undefined || value === null || value > 0 ? true : `Can't be zero`;
+
 	return (
 		<>
 			<GlobalStyle />
 			<CenterContainer>
 				<Wrapper>
 					<Interactive>
-						<div>
-							<NumberInput
-								label='Bill'
-								path='./icon-dollar.svg'
-								allowNegative={false}
-								decimalScale={2}
-							/>
-						</div>
+						<NumberInput
+							label='Bill'
+							iconPath='./assets/icon-dollar.svg'
+							allowNegative={false}
+							decimalScale={2}
+							isValid={isValidNumber}
+						/>
 						<TipSelector tip={tip!} setTip={setTip} />
+						<NumberInput
+							label='Number of People'
+							iconPath='./assets/icon-person.svg'
+							allowNegative={false}
+							decimalScale={2}
+							isValid={isValidNumber}
+						/>
 					</Interactive>
 					<Result></Result>
 				</Wrapper>
