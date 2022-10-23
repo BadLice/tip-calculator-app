@@ -1,3 +1,5 @@
+# Live demo: https://badlice.github.io/tip-calculator-app/
+
 # Frontend Mentor - Tip calculator app
 
 ![Design preview for the Tip calculator app coding challenge](./design/desktop-preview.jpg)
