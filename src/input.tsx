@@ -22,7 +22,7 @@ type NumberInputProps = NumericFormatProps & {
 	onValueChange?: OnValueChange | undefined;
 };
 
-const Icon = styled.div<IconProps>`
+const Icon = styled.span<IconProps>`
 	& {
 		position: absolute;
 		top: calc(36%);
