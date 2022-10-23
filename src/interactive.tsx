@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import './App.css';
 import { TipContext } from './contexts/tip.context';
 import NumberInput from './input';
 import TipSelector from './tip.selector';

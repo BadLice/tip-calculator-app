@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import './App.css';
 import Button from './button';
 import { TipContext } from './contexts/tip.context';
 import ResultItem from './result.item';

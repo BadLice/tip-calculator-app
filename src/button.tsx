@@ -24,7 +24,7 @@ const Btn = styled.button<ButtonProps>`
 	color: ${({ theme }) => theme.colors.text.button.default};
 	border: none;
 	border-radius: 5px;
-	font-size: 20px;
+	font-size: 1.25rem;
 	user-select: none;
 	position: relative;
 	overflow: hidden;

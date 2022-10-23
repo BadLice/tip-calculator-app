@@ -14,7 +14,7 @@ const Input = styled(NumericFormat)<InputProps>`
 	border: none;
 	background-color: ${({ theme }) => theme.colors.background.input.default};
 	text-align: right;
-	font-size: 18px;
+	font-size: 1.125rem;
 	color: ${({ theme }) => theme.colors.text.input.default};
 	padding-left: ${({ $hasIcon }) => ($hasIcon ? '25px' : '10px')};
 	border-radius: 5px;

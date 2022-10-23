@@ -24,19 +24,19 @@ const TextContainer = styled.div`
 const PrimaryText = styled.span`
 	color: ${({ theme }) => theme.colors.text.result.primary};
 	width: 100%;
-	font-size: 13px;
+	font-size: 0.813rem;
 `;
 
 const SecondaryText = styled.span`
 	color: ${({ theme }) => theme.colors.text.result.secondary};
 	width: 100%;
-	font-size: 10px;
+	font-size: 0.625rem;
 `;
 
 const Value = styled.span`
 	width: 100%;
 	text-align: right;
-	font-size: 30px;
+	font-size: 1.875rem;
 	color: ${({ theme }) => theme.colors.text.result.value};
 	font-weight: bold;
 `;

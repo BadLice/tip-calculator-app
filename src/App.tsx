@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import WebFont from 'webfontloader';
-import './App.css';
 import { TipProvider } from './contexts/tip.context';
 import Interactive from './interactive';
 import Result from './result';
@@ -39,7 +38,7 @@ const CenterContainer = styled.div`
 	}
 `;
 
-const Card = styled.div`
+const Card = styled.main`
 	max-width: 700px;
 	min-width: 700px;
 	max-height: 350px;

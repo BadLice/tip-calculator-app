@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import './App.css';
 
-const Container = styled.div`
+const Container = styled.h1`
 	width: 100%;
 	height: 100px;
 	text-align: center;
@@ -12,7 +11,7 @@ const Container = styled.div`
 	letter-spacing: 5px;
 	font-weight: bold;
 	color: ${({ theme }) => theme.colors.text.input.default};
-	font-size: 20px;
+	font-size: 1.25rem;
 `;
 
 const Splitter = () => {
