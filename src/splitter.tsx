@@ -17,8 +17,8 @@ const Container = styled.h1`
 const Splitter = () => {
 	return (
 		<Container>
-			<div>SPLI</div>
-			<div>TTER</div>
+			<span>SPLI</span>
+			<span>TTER</span>
 		</Container>
 	);
 };

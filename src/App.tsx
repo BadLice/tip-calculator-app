@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const CenterContainer = styled.div`
+const CenterContainer = styled.main`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -38,7 +38,7 @@ const CenterContainer = styled.div`
 	}
 `;
 
-const Card = styled.main`
+const Card = styled.div`
 	max-width: 700px;
 	min-width: 700px;
 	max-height: 350px;
